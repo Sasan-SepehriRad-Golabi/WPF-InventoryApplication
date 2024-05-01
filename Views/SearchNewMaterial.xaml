@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="InventoryApplication.Views.SearchNewMaterial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InventoryApplication.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"            
+             xmlns:vm="clr-namespace:InventoryApplication.ViewModels"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:convertor="clr-namespace:InventoryApplication.ViewModels.Convertors"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid  Background="White" Margin="0">
+        <Grid Margin="0" Width="800">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Uid="0" Width="130" Height="48" Margin="270,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196f3" Click="changebetweensearchandreport">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock FontWeight="ExtraBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="جستجو"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Uid="1" Width="130" Height="48"   Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196f3" Click="changebetweensearchandreport">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock FontWeight="ExtraBold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="گزارش گیری"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <Grid x:Name="underlinegrid" Width="130" Margin="270,0" Height="5" Background="#FF2196f3" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            </Grid>
+            <materialDesign:Transitioner Grid.Row="1" x:Name="subsearchtransitioner" AutoApplyTransitionOrigins="True">
+            </materialDesign:Transitioner>
+
+        </Grid>
+    </Grid>
+</UserControl>

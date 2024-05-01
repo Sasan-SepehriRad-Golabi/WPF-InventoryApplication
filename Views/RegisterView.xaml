@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="InventoryApplication.Views.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InventoryApplication.Views"
+             xmlns:vm="clr-namespace:InventoryApplication.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:components="clr-namespace:InventoryApplication.ViewModels.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vm:RegisterViewModel x:Key="regmodel"/>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding Source={StaticResource regmodel} }" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <materialDesign:ColorZone  Background="#FFFEFDFD"  VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch">
+            <StackPanel>
+                <Image gif:ImageBehavior.AnimatedSource="../Assets/Images/register.gif" Height="192" VerticalAlignment="Top" Margin="0 -38 0 0" >
+                </Image>
+                <Border Width="600" Margin="100,-10,100,0" HorizontalAlignment="Center" Height="252">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="3" BlurRadius="20"/>
+                    </Border.Effect>
+                    <Grid x:Name="MainContainerGrid" >
+                        <Grid Margin="-58,-29,-76,-96" HorizontalAlignment="Right" Width="734" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                Grid.Column="0"
+                Kind="Account" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Foreground="{Binding ElementName=UserNameTxt, Path=BorderBrush}"/>
+                                <TextBox  Grid.Column="1" Text="{Binding NewUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    x:Name="UserNameTxt"
+                    materialDesign:HintAssist.Hint="UserName"
+                    materialDesign:HintAssist.HelperText="نام کاربری خود را وارد نمایید" Margin="0,20,0.4,0"/>
+
+                            </Grid>
+                            <Grid Grid.Row="1" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                Grid.Column="0"
+                Kind="Key" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}"/>
+
+                                <components:BindablePasswordBox  Grid.Column="1"  x:Name="passwordBox" Password="{Binding NewUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               materialDesign:TextFieldAssist.HasClearButton="True"
+                    materialDesign:HintAssist.HelperText=" پسورد حداقل 8 کارکتر می باشد" Foreground="Black" Margin="0,24,0.4,0.2" />
+
+                            </Grid>
+                            <Grid Grid.Row="2" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                Grid.Column="0"
+                Kind="Key" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                <components:BindablePasswordBox  Grid.Column="1"  x:Name="ConfPasswordBox" Password="{Binding ConfirmPass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    materialDesign:HintAssist.Hint="Repeat Password"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    materialDesign:HintAssist.HelperText="تکرار پسورد را وارد نمایید" Margin="0,24,0.4,0.2"/>
+
+                            </Grid>
+                            <Grid Grid.Row="3" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                Grid.Column="0"
+                Kind="Settings" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Foreground="{Binding ElementName=IsAdminChkBox, Path=BorderBrush}"/>
+
+                                <CheckBox   Grid.Column="1"
+                        x:Name="IsAdminChkBox"  
+                        Content="IsAdmin"/>
+
+                            </Grid>
+                            <Button Command="{Binding RegisterCommand}" CommandParameter="{Binding NewUser}" x:Name="RegisterButton"   Grid.Row="4" Style="{DynamicResource MaterialDesignFlatLightBgButton}" Width="100" Height="Auto" Margin="317,0.4,317,38.8" Foreground="Black" FontWeight="ExtraBold">
+                                <StackPanel Margin="0 -5 0 0" Orientation="Horizontal">
+                                    <TextBlock Foreground="White" FontSize="15" Text="ثبت نام" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                    <materialDesign:PackIcon FontSize="15" Kind="Login" VerticalAlignment="Center" Foreground="White" Height="15" Width="20"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:Snackbar FlowDirection="RightToLeft" Panel.ZIndex="15"
+                            Background="{Binding AlarmBackground,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="{Binding AlarmForeground,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" IsActive="{Binding messagequeueactive,Mode=OneWay}" Margin="251,0,261,36.4" Message="{Binding ErrorMessage,Mode=OneWay}" MessageQueue="{materialDesign:MessageQueue}" />
+    </Grid>
+</UserControl>
